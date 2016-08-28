@@ -3,8 +3,8 @@
         Creates a formatted csv for importing data sources into McAfee ESM. Once the csv has been created, open it in Notepad or Notepad++ and save the document with UTF8 encoding.
 
     .DESCRIPTION  
-        This script will log the actions it performs, receives the domain computer listing, checks that you are an administrator, and formulates a formatted csv for McAfee ESM. You will have to supply the ESM receiver ID, the username (domain\user) and password that will be used to authenticate to the end workstation.
-
+        This script will log the actions it performs, receives the domain computer listing, checks that you are an administrator, and formulates a formatted csv for McAfee ESM. You 
+        will have to supply the ESM receiver ID, the username (domain\user) and the password that will be used to authenticate to the end workstation.
 
     The first call is to get the folder path where you want to store all results and files in.
     The second call asks how to search.
@@ -18,7 +18,7 @@
     The function Get-Subnet-Range will break out subnet ranges
 
     .NOTES  
-        File Name      : ESM_csv.ps1
+        File Name      : McAfeeESM_MassSourceUploader.ps1
         Version        : v.0.1  
         Author         : WiredPulse
         Email          : 
