@@ -1,0 +1,21 @@
+# NOTE: The user you use to query Excahnge with must have the Discovery Management RBAC Role.
+
+# Add a user to the Discovery Management RBAC Role
+Add-RoleGroupMember "discovery management" -member <some_user>
+
+<#
+The below will enable you to search mailboxes for email(s) with attachments named “document1” and “document2” 
+regardless of the file extension. The script will then copy the email message to the “admin.mailbox” mailbox 
+in a folder called “Search_07102014”. Once the script is complete open “admin.mailbox” in Outlook and you’ll 
+see the “Search_11242015” folder under the Inbox containing all the results.
+#>
+get-mailbox | Search-Mailbox -SearchQuery 'Attachment:"document1.*" or "document2.*"' -TargetMailbox admin.mailbox -TargetFolder "Search_11242015" -LogLevel Full 
+
+
+#This modification will search for all “.doc” and “.pdf” files and copy them to the same mailbox and folder
+get-mailbox | Search-Mailbox -SearchQuery 'Attachment:"*.doc" or "*.pdf"' -TargetMailbox admin.mailbox -TargetFolder "Search_11242015" -LogLevel Full 
+
+
+#To search for keywords use this modification.
+get-mailbox | Search-Mailbox -SearchQuery "badword1" or "badword2" -TargetMailbox admin.mailbox -TargetFolder "Search_11242015" -LogLevel Full 
+
