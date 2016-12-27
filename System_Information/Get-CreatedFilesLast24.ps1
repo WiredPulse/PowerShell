@@ -18,7 +18,7 @@ $current_user = [Environment]::UserName
 # ==============================================================================
 foreach($cpu in $computers)
     { 
-    $dir_list = Get-ChildItem -Path c:\ -recurse -erroraction 'silentlycontinue' | Where-Object {$_.CreationTime -gt (Get-Date).AddDays(-1) } | Select-Object FullName, CreationTime, Length | sort creationtime -Descending
+    $dir_list = Get-ChildItem -Path c:\ -recurse -force -erroraction 'silentlycontinue' | Where-Object {$_.CreationTime -gt (Get-Date).AddDays(-1) } | Select-Object FullName, CreationTime, Length | sort creationtime -Descending
         foreach($new_dir in $dir_list)
             { 
             $new_table += $cpu + '+' + ($new_dir -replace '@{FullName=','' -replace '; CreationTime=','+' -replace '; Length=','+' -replace '}','') + $newline

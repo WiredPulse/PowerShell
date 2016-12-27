@@ -14,7 +14,7 @@ REQUIREMENTS:
 # ============================================================================== 
 # Gets a listing of text files
 # ============================================================================== 
-$items = Get-ChildItem c:\ -Recurse -ErrorAction ignore | where {$_.extension -eq ".txt"}
+$items = Get-ChildItem c:\ -Recurse -Force -ErrorAction ignore | where {$_.extension -eq ".txt"}
 
 # ============================================================================== 
 # Important Variables
