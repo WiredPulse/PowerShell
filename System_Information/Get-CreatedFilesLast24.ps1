@@ -39,4 +39,4 @@ import-csv "c:\users\$current_user\desktop\Last24.txt" -Delimiter '+' -Header 'S
 # Cleanup  
 # ==============================================================================  
 Remove-Item "c:\users\$current_user\desktop\Last24.txt"  
-Remove-Variable dir_list, new_table, new_dir 
+Remove-Variable dir_list, new_table, new_dir  
