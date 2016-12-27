@@ -46,3 +46,4 @@ import-csv "c:\users\$current_user\desktop\hits.txt" -Delimiter '+' -Header 'Pat
 Remove-Item "c:\users\$current_user\desktop\hits.txt" 
 Remove-Variable file_hit, hits, item, items
 
+
