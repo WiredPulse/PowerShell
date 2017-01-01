@@ -1,7 +1,7 @@
 <#
     .SYNOPSIS  
         Audits a Domain Controller for specific data used to gain an understanding of the domain. This script should be run on the Domain Controller.
-
+d
     .DESCRIPTION  
         When ran, data is exported as a .csv, .html, or .txt. You can view it as is and for the .csv, you can import it back into PowerShell and view it using out-gridview. To use this option, do the following:
 			PS C:\Users\<User>\Desktop> Import-CSV .\<file>.csv | Out-Gridview
@@ -345,6 +345,9 @@ get-wmiobject -Namespace root\MicrosoftDNS -class microsoftdns_resourcerecord | 
 
 # Gets Zones 
 Get-WmiObject -namespace "root\MicrosoftDNS" -class MicrosoftDNS_Zone | select Name | Export-CSV .\Audit\DNS\Zones.csv
+
+# Gets DNS information
+dnscmd.exe /info | out-file .\DNS_Info.txt
 
 # Stats
 get-wmiobject -Namespace root\MicrosoftDNS -class microsoftdns_statistic | select name, value | Export-CSV .\Audit\DNS\Stats.csv
