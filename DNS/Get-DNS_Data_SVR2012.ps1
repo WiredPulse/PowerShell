@@ -20,6 +20,9 @@ dnscmd /info /globalqueryblocklist | out-file .\Blocked_items.txt
 # Determines if the blocklist is enabled or not. "1" = enabled, "0" = disabled
 dnscmd /info /enableglobalqueryblocklist | out-file .\Blocklist_status.txt
 
+# Gets DNS information
+dnscmd.exe /info | out-file .\DNS_Info.txt
+
 Get-DnsServerRecursion | out-file .\Recursion.txt
 Get-DNSServerRootHint | out-file .\Roothints.txt
 Get-DnsServerScavenging | out-file .\Scavenging.txt
