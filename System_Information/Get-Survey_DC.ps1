@@ -1,7 +1,7 @@
 <#
     .SYNOPSIS  
         Audits a Domain Controller for specific data used to gain an understanding of the domain. This script should be run on the Domain Controller.
-d
+
     .DESCRIPTION  
         When ran, data is exported as a .csv, .html, or .txt. You can view it as is and for the .csv, you can import it back into PowerShell and view it using out-gridview. To use this option, do the following:
 			PS C:\Users\<User>\Desktop> Import-CSV .\<file>.csv | Out-Gridview
@@ -51,6 +51,7 @@ d
                 Roles_and_Features.txt
                 Scheduled_Tasks.txt
                 Shares.txt
+		Domain_Trusts.txt
             Domain_<Domain_Name>.html
             Forest_<Forest_Name>.html
 
@@ -398,6 +399,9 @@ Net Use | out-file .\Audit\misc\Mapped_Drives.txt
 ### Shares
 Write-Host "Retrieving shares..."
 Net Share | out-file .\Audit\misc\Shares.txt
+
+### Domain Trusts
+Get-WmiObject -Class Microsoft_DomainTrustStatus -Namespace ROOT\MicrosoftActiveDirectory | Select-Object PSComputername, TrustedDomain, TrustAttributes, TrustDirection, TrustType |fl | out-file .\Audit\misc\Domain_Trusts.txt
 
 ### Scheduled Tasks
 Write-Host "Retrieving scheduled tasks..."
