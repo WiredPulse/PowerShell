@@ -1,0 +1,35 @@
+RawCopy Changelog
+
+v1.0.0.17: Optimization of code parsing directories ($I30). Thanks to natocccp. 
+
+v1.0.0.16: Changed calculation of MFT_Record_Size to accomodate for a rare bug seen in certain Windows 7 x64 vm's.
+
+v1.0.0.15: Added support for specifying device paths as /FileNamePath param. Changed param /ImageNtfsVolume to /ImageVolume.
+
+v1.0.0.14: Added 06 as valid partition type (while still validating for NTFS).
+
+v1.0.0.13: Added support for extracting files off image files. Syntax changes. Changed output filenames to contain attribute stream name instead of attribute number where applicable. Improved accuracy of extraction of files by filename.
+
+v1.0.0.12: Fixed bug that caused only one or the other of $INDEX_ROOT/$INDEX_ALLOCATION to be evaluated for content.
+
+v1.0.0.11: Fixed bug in extracting system locked files located in the root of drive.
+
+v1.0.0.10: Fixed bug when $MFT itself contained an $ATTRIBUTE_LIST. Fixed bug with handling records that was split across dataruns. Increased initialization size of array for runs and vcns which caused it to crash with extreme fragmentation.
+
+v1.0.0.9: Added support for handling MFT record sizes of 4096 bytes.
+
+v1.0.0.8: Fixed incorrect version printed.
+
+v1.0.0.7: Fixed bug that caused certain files defined by its name not to be extracted. 
+
+v1.0.0.6: Fixed bug that produced files with just 00's when specifying source file by its IndexNumber?. 
+
+v1.0.0.5: Changed third optional parameter as it was incorrectly named and described. 
+
+v1.0.0.4: Large part of the code base has been updated. Now there is also an option to extract all metafiles too. 
+
+v1.0.0.3: Added ability to specify offset of a given $MFT record. See examples for syntax. 
+
+v1.0.0.2: Added ability to also extract files marked as deleted. 
+
+v1.0.0.1: First version. 
