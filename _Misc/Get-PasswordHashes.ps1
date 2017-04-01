@@ -1,56 +1,22 @@
 ﻿<# 
 .SYNOPSIS 
-Nishang payload which dumps password hashes. 
+    Nishang payload which dumps password hashes to console. 
  
 .DESCRIPTION 
-The payload uses Enable-DuplicateToken payload and then the hashes are dumped using the powerdump script from MSF.
-The hashes could be exfiltrated using method of choice.
-
-.PARAMETER exfil
-Use this parameter to use exfiltration methods.
-
-.PARAMETER dev_key
-The Unique API key provided by pastebin when you register a free account.
-Unused for tinypaste.
-Unused for gmail option.
-
-.PARAMETER username
-Username for the pastebin account where keys would be pasted.
-Username for the tinypaste account where keys would be pasted.
-Username for the gmail account where attachment would be sent as an attachment.
-
-.PARAMETER password
-Password for the pastebin account where keys would be pasted.
-Password for the tinypaste account where keys would be pasted.
-Password for the gmail account where keys would be sent.
-
-.PARAMETER keyoutoption
-The method you want to use for exfitration of data.
-"0" for displaying on console
-"1" for pastebin.
-"2" for gmail
-"3" for tinypaste  
+    The payload uses Enable-DuplicateToken payload and then the hashes are dumped using the powerdump script from MSF.
+    The hashes could be exfiltrated using method of choice.
 
 .EXAMPLE 
-PS > .\Get-PassHashes.ps1 
+    PS > .\Get-PassHashes.ps1 
 
-.EXAMPLE 
-PS > .\Get-PassHashes.ps1 -exfil <dev_key> <username> <password> <keyoutoption>
-
-Use above when using the payload from non-interactive shells.
+    Dumps password hashes to the console.
  
 .LINK 
-http://blogs.technet.com/b/heyscriptingguy/archive/2012/07/05/use-powershell-to-duplicate-process-tokens-via-p-invoke.aspx
-http://code.google.com/p/nishang
+    http://blogs.technet.com/b/heyscriptingguy/archive/2012/07/05/use-powershell-to-duplicate-process-tokens-via-p-invoke.aspx
+    http://code.google.com/p/nishang
 
 #> 
 
-Param ( [Parameter(Parametersetname="noexfil")] $noexfil,
-[Parameter(Parametersetname="exfil")] [Switch] $exfil,
-[Parameter(Position = 0, Mandatory = $True, Parametersetname="exfil")] [String] $dev_key,
-[Parameter(Position = 1, Mandatory = $True, Parametersetname="exfil")] [String]$username,
-[Parameter(Position = 2, Mandatory = $True, Parametersetname="exfil")] [String]$password,
-[Parameter(Position = 3, Mandatory = $True, Parametersetname="exfil")] [String]$keyoutoption )
 
 function Get-PassHashes { 
  

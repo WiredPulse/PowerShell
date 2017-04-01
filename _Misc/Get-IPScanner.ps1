@@ -1,10 +1,38 @@
-﻿# asynchronous IP range scanner 
-# http://www.sherweb.com/blog/fun-with-powershell-the-less-than-simple-way-to-scan-an-ip-range/ 
+﻿<# 
+.SYNOPSIS
+    Asynchronous IP range scanner (ping sweep).  
+
+.PARAMETER net
+    First three octects of the IP range.
+
+.PARAMETER startrange
+    Octect to start with.
+
+.PARAMETER endrange
+    Octect to end with.
+
+.EXAMPLE
+    PS c:\> .\Get-IPScanner.ps1 -net '192.168.0' -startrange '80' -endrange '127'
+
+    Scans 192.168.080 - 192.168.0.127".
+
+.LINKS
+    http://www.sherweb.com/blog/fun-with-powershell-the-less-than-simple-way-to-scan-an-ip-range/
+#>
+
+
+param(
+[Parameter(Mandatory=$true)][string]$Net,
+[Parameter(Mandatory=$true)][int]$StartRange,
+[Parameter(Mandatory=$true)][int]$EndRange
+)
+
  
 # define the range  
-[string]$firstThree = “192.168.1”  
-[int]$startRange = 165  
-[int]$endRange = 175  
+
+#[string]$firstThree = “192.168.1”  
+#[int]$startRange = 165  
+#[int]$endRange = 175  
 
 # defines how many IPs to scan at a time. Used to limit the amount of resources used by the scan.  
 $groupMax = 50  

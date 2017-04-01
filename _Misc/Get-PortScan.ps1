@@ -1,15 +1,37 @@
-﻿<#
-    .SYNOPSIS  
-        Port scanner that informs you if an IP is listening on a specified port.
+﻿<# 
+.SYNOPSIS
+    Scans a range of IPs and informs you if a specific port is listening. 
 
-    ####################################################################################
+.PARAMETER port
+    Port to scan.
 
+.PARAMETER net
+    Network ID. Ex: 172.16.155.
+
+.PARAMETER start
+    IP to start with... only input the last octect. Ex: .10.
+    
+.PARAMETER end
+    IP to end with... only input the last octect. Ex: .30.
+
+.EXAMPLE
+    PS c:\> .\Get-PortScan.ps1
+                    Input a port to scan:    135
+                    Input a Network to scan (first three octects):    172.16.155
+                    Input a starting range (last octect only):    10
+                    Input an ending range (last octect only):    30
+
+    Executing the script and answer the following questions with the above would scan 172.16.155.10 - 172.16.155.30 to see
+    if port 135 is listening.
 #>
 
 
-$port = 135
-$net = “192.168.0”
-$range = 127..129
+$port = read-host "Input a port to scan"
+$net =  read-host "Input a Network to scan (first three octects)"
+$start = read-host "Input a starting range (last octect only)"
+$end = read-host "Input an ending range (last octect only)"
+
+$range = $start..$end
 
 foreach ($r in $range)
 

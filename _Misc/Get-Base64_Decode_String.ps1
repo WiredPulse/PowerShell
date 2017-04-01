@@ -1,5 +1,20 @@
-﻿# Takes encoded Base64 string and decodes it.
+﻿<# 
+.SYNOPSIS
+    Decodes a Base64 string.
 
-Write-host -ForegroundColor cyan "Input Base64 string to decode"
-$base64string = read-host " " 
-[System.Text.Encoding]::UTF8.GetString(([System.Convert]::FromBase64String($base64string)|?{$_}))
+.PARAMETER decode
+    String to Base64 decode.
+
+.EXAMPLE
+    PS c:\> .\Get-Base64_Decode_String.ps1 -decode aABhAG0AYgB1AHIAZwBlAHIA
+
+    Decoding a Base64 string.
+#>
+
+
+param(
+[Parameter(Mandatory=$true)][string]$decode
+)
+
+ 
+[System.Text.Encoding]::UTF8.GetString(([System.Convert]::FromBase64String($decode)|?{$_}))
