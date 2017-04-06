@@ -25,9 +25,14 @@ param(
      )
 
 
-if(!(test-path c:\users\$env:USERNAME\desktop\MFTs))
+if(!(test-path c:\users\$env:USERNAME\desktop\USNJRNL))
     {
-    new-item c:\users\$env:USERNAME\desktop\MFTs -ItemType directory | out-null
+    new-item c:\users\$env:USERNAME\desktop\USNJRNL -ItemType directory | out-null
+    }
+
+if(test-path .\usnjrnl.ps1)
+    {
+    remove-item .\usnjrnl.ps1 -ErrorAction SilentlyContinue
     }
 
 
@@ -35,14 +40,14 @@ Function call
 {
 foreach($cpu in $computers)
     {
-    if(test-path \\$cpu\c$\rawcopy.exe)
+    if(test-path \\$cpu\c$\ExtractUsnJrnl.exe)
         {
-        remove-item \\$cpu\c$\rawcopy.exe
+        remove-item \\$cpu\c$\ExtractUsnJrnl.exe
         }
     Copy-Item $path \\$cpu\c$\.
-    copy-item rawcopy.ps1 \\$cpu\c$\.
+    copy-item usnjrnl.ps1 \\$cpu\c$\.
 
-    $proc = Invoke-WmiMethod -ComputerName $cpu -Class Win32_Process -Name Create -ArgumentList "powershell /c c:\rawcopy.ps1"
+    $proc = Invoke-WmiMethod -ComputerName $cpu -Class Win32_Process -Name Create -ArgumentList "powershell /c c:\usnjrnl.ps1"
     $my_var = Register-WmiEvent -ComputerName $cpu -Query "Select * from Win32_ProcessStopTrace Where ProcessID=$($proc.ProcessId)" -MessageData $cpu -Action { Write-Host "$($Event.MessageData) Process ExitCode: $($event.SourceEventArgs.NewEvent.ExitStatus)"} 
         if($proc.processid -ne $null)
             {
@@ -50,7 +55,7 @@ foreach($cpu in $computers)
             }
         elseif($proc.processid -eq $null)
             {
-            "$pu : Not accessible via WMI" >> c:\users\$env:USERNAME\desktop\MFTs\_Log.txt
+            "$pu : Not accessible via WMI" >> c:\users\$env:USERNAME\desktop\USNJRNL\_Log.txt
             }
 
     write-host 'Process call initiated on' $cpu'...' -ForegroundColor cyan
@@ -62,11 +67,12 @@ Function retrieve
 {
 foreach($cpu in $computers)
     {
-    copy-Item \\$cpu\c$\users\public\$mft_record c:\users\$env:USERNAME\Desktop\MFTs
-    rename-item c:\users\$env:USERNAME\Desktop\MFTs\$mft_record c:\users\$env:USERNAME\Desktop\MFTs\$cpu-$mft_record
-    remove-item \\$cpu\c$\RawCopy.ps1
-    remove-item \\$cpu\c$\RawCopy.exe
-    remove-item \\$cpu\c$\users\public\$mft_record
+    copy-Item \\$cpu\c$\users\public\*-jrnl.cab c:\users\$env:USERNAME\Desktop\usnjrnl
+    remove-item \\$cpu\c$\usnjrnl.ps1
+    remove-item \\$cpu\c$\ExtractUsnJrnl.exe
+    remove-item \\$cpu\c$\users\public\*J.bin
+    remove-item \\$cpu\c$\users\public\*-jrnl.cab
+    Remove-Item .\usnjrnl.ps1
 
     write-host 'Pulling data back from' $cpu'...' -ForegroundColor green
     }
@@ -74,26 +80,23 @@ foreach($cpu in $computers)
 
 
 # making script
-"c:\RawCopy.exe /FileNamePath:\\.\PhysicalDrive0:0 /ImageVolume:1 /OutputPath:c:\users\public" >> .\rawcopy.ps1
+"C:\ExtractUsnJrnl.exe /DevicePath:c: /OutputPath:C:\users\public | out-null " >> .\usnjrnl.ps1
+"makecab 'C:\users\public\`$UsnJrnl_`$J.bin' C:\users\public\`$env:COMPUTERNAME-jrnl.cab | Out-Null " >> .\usnjrnl.ps1
 
 if($ComputerName -like '*.txt')
     {
-    $exe = $path.split('\') | select -last 1
     $computers = Get-content $computername
     call
     # Allow time for the command to run
-    sleep 25
-    $mft_record = '$mft'
+    sleep 45
     retrieve
     }
 elseif($ComputerName -notcontains '.txt')
     {
-    $exe = $path.split('\') | select -last 1
     $computers = $ComputerName
     call
     # Allow time for the command to run
-    sleep 25
-    $mft_record = '$mft'
+    sleep 45
     retrieve
     }
 else{Echo 'No IP or a file containing IPs were specified'}

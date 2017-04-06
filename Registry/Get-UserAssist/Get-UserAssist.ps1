@@ -74,13 +74,13 @@ Function retrieve
 # Parameters received at the start of running the script
 if($ComputerName -like '*.txt')
     {
-    $cpu = Get-content $computername
+    $computers = Get-content $computername
     call
     retrieve
     }
 elseif($ComputerName -notcontains '.txt')
     {
-    $cpu = $ComputerName
+    $computers = $ComputerName
     call
     retrieve
     }
