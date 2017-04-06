@@ -1,15 +1,14 @@
 ﻿<#
-This script will deploy a temporary webserver on the local system and will 
-listen of the port of you choice. Once it is listening, you will be able to 
-transfer .txt and .html files from the directory in which the script is ran 
-from (not located). The webserver will continue to run as long as the script is running.
+.SYNOPSIS
+    This script will deploy a temporary webserver on the local system and will listen of the port of you choice. Once it is listening, you will be able to 
+    transfer .txt and .html files from the directory in which the script is ran from (not located). The webserver will continue to run as long as the script is running.
 
-To execute, run the script and when prompted, input a port to listen on. To access 
-the system and the data in the directory that the script ran from, use the below syntax.
+    To execute, run the script and when prompted, input a port to listen on. To access the system and the data in the directory that the script ran from, use the below syntax.
 
-    Invoke-WebRequest http:/<IP_Address>:<port>/file_in_dir.txt -OutFile downloaded_data.txt
+.EXAMPLE
+    Invoke-WebRequest http:/<IP_Address>:<port>/file_in_dir.txt -OutFile <downloaded file>
 
-    Example: "Invoke-WebRequest http:/192.168.1.1:8001/passwords.txt -OutFile passwords.txt"
+    Invoke-WebRequest http:/192.168.1.1:8001/passwords.txt -OutFile passwords.txt
 #>
 
 # gets IP address of the system

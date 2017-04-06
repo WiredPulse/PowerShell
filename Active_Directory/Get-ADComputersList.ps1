@@ -1,5 +1,12 @@
-﻿    # Gets a perfectly formatted list of computer names from a domain and writes it to c:\
+﻿<#
+.SYNOPSIS
+    Gets a perfectly formatted list of computer names from a domain and writes it to c:\.
+
+.LINK
     
+#>
+
+   
     $DN = ""
     $DNSName = ""
     $DNSArray = ""

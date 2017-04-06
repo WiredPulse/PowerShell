@@ -86,7 +86,9 @@ script is stopped.
 
     .LINK
         http://gallery.technet.microsoft.com/scriptcenter/Get-NetworkStatistics-66057d71
-    #>	
+#>	
+
+
 	[OutputType('System.Management.Automation.PSObject')]
 	[CmdletBinding()]
 	param(

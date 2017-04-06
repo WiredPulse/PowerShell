@@ -1,21 +1,25 @@
 <#
-    .SYNOPSIS  
-        Retrieves the last logon time for a domain user. You must supply the domain on line 13 of this script.
+.SYNOPSIS  
+    Retrieves the last logon time for a domain user. 
 
-    ####################################################################################
+.PARAMETER domain
+    Used to specify the domain name
 
+.EXAMPLE
+    PS C:\> .\Get-UserLastLogonTime.ps1 -domain 'sandbox'
+    
+    Specifies the sandbox domain
 #>
 
-##################
-#--------Config
-##################
+param(
+[Parameter(Mandatory=$true)][string]$Domain
+)
 
-$domain = "<Domain_Here>"
 
-##################
-#--------Main
-##################
 
+import-module activedirectory
+cls
+$domain = (Get-ADDomain).name
 import-module activedirectory
 cls
 "The domain is " + $domain

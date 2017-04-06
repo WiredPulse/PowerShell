@@ -1,12 +1,16 @@
-# Retrieves relevant DNS data in Server 2012. The output of each is saved in a newly created DNS folder right off of where this script is ran from.
+<# 
+.SYNOPSIS
+    Retrieves relevant DNS data in Server 2012.
+
+#>
 
 New-Item .\DNS_Data -type directory
-Set-Location DNS
+Set-Location .\DNS_Data
 
 Get-DNSServerStatistics | out-file .\Stats.txt
 Get-DnsServer | out-file .\Server_Info.txt
 Get-DnsServerDiagnostics | out-file .\Server_Diag.txt
-Get-DnsServerDsSetting | out-file .\DirecotyrServices_Settings.txt
+Get-DnsServerDsSetting | out-file .\DirectoryServices_Settings.txt
 Get-DnsServerForwarder | out-file .\Forwarders.txt
 Get-DnsServerGlobalNameZone | out-file .\Global_Name_Zone.txt
 
@@ -29,5 +33,5 @@ Get-DnsServerScavenging | out-file .\Scavenging.txt
 Get-DnsServerSetting | out-file .\Server_Settings.txt
 Get-DnsServerZone | out-file .\Zones.txt
 
-get-wmiobject -Namespace root\MicrosoftDNS -class microsoftdns_resourcerecord | select __Class, ContainerName, DomainName, RecordData, ownername | Export-CSV ./All_Records.csv
+get-wmiobject -Namespace root\MicrosoftDNS -class microsoftdns_resourcerecord | select __Class, ContainerName, DomainName, RecordData, ownername | Export-CSV .\All_Records.csv
 

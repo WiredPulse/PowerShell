@@ -1,20 +1,13 @@
 <#
-    .NOTES
-       ***  Bypasses Execution Policy  ***
+.SYNOPSIS
+    ***  Bypasses Execution Policy  ***
+    Copies and runs a script on a remote system and outputs the data to a text file. After completion, retrieves the text file of data from the distant compter and 
+    saves it to the local machine. Lastly the copied script and text file of output are deleted from the distant machine.
 
-    .SYNOPSIS
-        Copies and runs a script on a remote system and outputs the data to a text file. After completion, retrieves 
-        the text file of data from the distant compter and saves it to the local machine. Lastly the copied script and 
-        text file of output are deleted from the distant machine.
-
-    .REQUIREMENTS
-        - Requires an account on the remote computer (Hopefully one with permissions)
-        - Requires C$ or Admin Share
-
-    .USAGE
-        1 - Replace the $computers and $script2run variable to represent your situation
-        2 - Save your changes
-        3 - Execute the script
+.USAGE
+    1 - Replace the $computers and $script2run variable to represent your situation
+    2 - Save your changes
+    3 - Execute the script
 #>
 
 

@@ -1,8 +1,9 @@
 ﻿<#
-SYNOPSIS:
+.SYNOPSIS
     Gets domain trust information
 
-UNDERSTANDING OUTPUT:
+.NOTES:
+    UNDERSTANDING OUTPUT:
     TrustedAttributes = Direction of Trust
         1 = Non-Transitive
         2 = Transitive

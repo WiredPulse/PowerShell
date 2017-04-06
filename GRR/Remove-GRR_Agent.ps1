@@ -1,6 +1,7 @@
 ﻿<#
 
-Deletes the GRR Agent
+.SYNOPSIS
+    Deletes the GRR Agent on a system.
 
 #>
 

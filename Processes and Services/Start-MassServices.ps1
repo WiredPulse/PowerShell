@@ -1,12 +1,29 @@
 ﻿<# 
-Starts a specific service and logs the status along with the start time to two local files.
- 
-Input the service and process name on lines 8 and 9.
+.SYNOPSIS
+    Starts a specifiec service and logs the status along with the start time. Start time and status are written to two local files.
+
+.PARAMETER computer
+    Used to feed the script a file containing computer names or IPs. A single IP can be used as well.
+
+.PARAMETER service
+    Used to specify a service name.
+
+.PARAMETER process
+    Used to specify a process name.
+
+.EXAMPLE
+    PS C:\> .\Start-MassServices.ps1 -computers c:\computers.txt -service 'splunkforwarder service' -process 'splunkd'
+
+    Restarts the splunk service and logs the time the service and process restarted.
 #>
 
-$computers = get-content C:\users\blue\Desktop\computers.txt
-$service = " "
-$process_name = " "
+param(
+    [Parameter(Mandatory=$true)][string]$Computers,
+    [Parameter(Mandatory=$true)][string]$Service,
+    [Parameter(Mandatory=$true)][string]$Process
+    )
+
+
 $service_stat = "service_status.txt"
 $start_times = "service_start_time.txt"
 
@@ -20,7 +37,8 @@ get-service -computername $computers -name $service | start-service
 get-service -computername $computers -name $service | Select MachineName, Name, Status   | ft -AutoSize  >> $service_stat
 
 # Gets the start time of a proces,s which is tied to a service
-foreach($computer in $computers){
-echo $computer >> $start_times
-get-process -Name $process_name | select Name, StartTime | ft >> $start_times
-}
+foreach($computer in $computers)
+    {
+    echo $computer >> $start_times
+    get-process -Name $process | select Name, StartTime | ft >> $start_times
+    }

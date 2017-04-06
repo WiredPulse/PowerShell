@@ -1,5 +1,6 @@
 ﻿<# 
-Gets all files created within the last 24 hours
+.SYNOPSIS
+    Gets all files created within the last 24 hours
 #>
 
 # ==============================================================================  

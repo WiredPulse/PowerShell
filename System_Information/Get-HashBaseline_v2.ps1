@@ -1,14 +1,14 @@
 ﻿<#
-    .SYNOPSIS:
-        Gets file hash of files in a directory recursively. The system name, hash, and file with path are exported to a CSV that is best read back into
-        PowerShell using out-gridview.
+.SYNOPSIS:
+    Gets file hash of files in a directory recursively. The system name, hash, and file with path are exported to a CSV that is best read back into
+    PowerShell using out-gridview.
 
-    .USAGE:
-        - Change variables on line 12
-        - Execute script from elevated shell
+.USAGE:
+    - Change variables on line 18
+    - Execute script from elevated shell
 
-    .REQUIREMENTS
-        - PowerShell Version 2
+.REQUIREMENTS
+    - PowerShell Version 2
 
 #>
 

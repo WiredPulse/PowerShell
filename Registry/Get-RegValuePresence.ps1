@@ -1,43 +1,76 @@
 ﻿<#
-SYNOPSIS:
+.SYNOPSIS
     Queries for a specific Registry Value across a group of systems and returns if it is present or not.
 
-USAGE:
-    1) Adjust the variables in lines 34, 37, and 40
-    2) Run the script with an account with WMI rights and follow the prompts
-    3) Results will be returned to the screen
+.PARAMETER key
+    Used to specify the path to the key to verify.
 
-    .NOTES  
-        File Name      : Get-RegValuePresence.ps1
-        Version        : v.0.1  
-        Author         : @WiredPulse
-        Prerequisite   : PowerShell v2
-        Created        : 23 Dec 16
+.PARAMETER value
+    Used to specify the value to verify.
 
+.PARAMETER HKEY_CLASSES_ROOT
+    Used to specify HKCR.
 
-    ####################################################################################
+.PARAMETER HKEY_CURRENT_USER
+    Used to specify HKCU.
+
+.PARAMETER HKEY_LOCAL_MACHINE
+    Used to specify HKLM.
+
+.PARAMETER HKEY_USERS
+    Used to specify HKUS.
+
+.PARAMETER HKEY_CURRENT_CONFIG
+    Used to specify HKCC.
+
+.EXAMPLE
+    PS C:\> Get-RegKeyValuePresence.ps1 -HKEY_LOCAL_MACHINE -key SOFTWARE\Microsoft\Windows NT\CurrentVersion -value CurrentBuild
+
+    Verifiying if the Value 'CurrentBuild' exists or not within the 'HKLM:\CurrentVersion\SOFTWARE\Microsoft\Windows NT\CurrentVersion' Key
+
 #>
 
-# ==============================================================================
-# Important Variables (Don't Touch)
-# ==============================================================================
-$HKCR = 2147483648 #HKEY_CLASSES_ROOT 
-$HKCU = 2147483649 #HKEY_CURRENT_USER 
-$HKLM = 2147483650 #HKEY_LOCAL_MACHINE 
-$HKUS = 2147483651 #HKEY_USERS 
-$HKCC = 2147483653 #HKEY_CURRENT_CONFIG 
 
-# ==============================================================================
-# Variables to Change
-# ==============================================================================
-# Specify a hive to look in... options are above
-$reg_hive = $hklm
+param(
+    [Parameter(Mandatory=$true)][string]$Key,
+    [Parameter(Mandatory=$true)][string]$Value,
+    [switch]$HKEY_CLASSES_ROOT,
+    [switch]$HKEY_CURRENT_USER,
+    [switch]$HKEY_LOCAL_MACHINE,
+    [switch]$HKEY_USERS,
+    [switch]$HKEY_CURRENT_CONFIG
+    )
 
-# Specify the Registry Key
-$key = "SOFTWARE\Microsoft\Windows\CurrentVersion" 
 
-# Specify the Registry Value
-$value = "CommonFilesDir" 
+if($HKEY_CLASSES_ROOT)
+    {
+    $HKCR = [uint32]'0x80000000' #HKEY_CLASSES_ROOT
+    $hive = $HKCR
+    }
+
+if($HKEY_CURRENT_USER)
+    {
+    $HKCU = [uint32]'0x80000001' #HKEY_CURRENT_USER
+    $hive = $HKCU
+    }
+
+if($HKEY_LOCAL_MACHINE)
+    {
+    $HKLM = [uint32]'0x80000002' #HKEY_LOCAL_MACHINE
+    $hive = $HKLM
+    }
+
+if($HKEY_USERS)
+    {
+    $HKUS = [uint32]'0x80000003' #HKEY_USERS
+    $hive = $HKUS
+    }
+
+if($HKEY_CURRENT_CONFIG)
+    {
+    $HKCC = [uint32]'0x80000005' #HKEY_CURRENT_CONFIG
+    $hive = $HKCC
+    }
 
 
 # ==============================================================================
@@ -447,13 +480,13 @@ If($strResponse -eq "1"){. ListComputers | Sort-Object}
 foreach($cpu in $computers)
     {
     $reg = Get-WmiObject -list stdregprov -ns root/default -ComputerName $cpu
-    $r = $reg.GetStringValue($reg_hive, $key, $value)  ## REG_SZ
+    $r = $reg.GetStringValue($hive, $key, $value)  ## REG_SZ
         if($r.svalue)
             {
-	        Write-Host $cpu "Value is Present"
+	        Write-Host $cpu "-- Value is Present"
             }
         else
             {
-	        Write-Host $cpu "Value is not Present (Code $($r.ReturnValue))"
+	        Write-Host $cpu "-- Value is not Present (Code $($r.ReturnValue))"
             }
     }

@@ -1,46 +1,47 @@
-﻿#requires -version 2.0
-
-function Get-RegTime {
-<#
+﻿<#
 .SYNOPSIS
-Adds note properties containing the last modified time and class name of a 
-registry key.
+    Adds note properties containing the last modified time and class name of a 
+    registry key.
 
 .DESCRIPTION
-The Add-RegKeyMember function uses the unmanged RegQueryInfoKey Win32 function
-to get a key's last modified time and class name. It can take a RegistryKey 
-object (which Get-Item and Get-ChildItem output) or a path to a registry key.
+    Add-RegKeyMember function uses the unmanged RegQueryInfoKey Win32 function
+    to get a key's last modified time and class name. It can take a RegistryKey 
+    object (which Get-Item and Get-ChildItem output) or a path to a registry key.
 
 .EXAMPLE
-PS> Get-Item HKLM:\SOFTWARE | Add-RegKeyMember | Select Name, LastWriteTime
+    PS c:\> Get-Item HKLM:\SOFTWARE | Get-RegWritetime | Select Name, LastWriteTime
 
-Show the name and last write time of HKLM:\SOFTWARE
-
-.EXAMPLE
-PS> Add-RegKeyMember HKLM:\SOFTWARE | Select Name, LastWriteTime
-
-Show the name and last write time of HKLM:\SOFTWARE
+    Show the name and last write time of HKLM:\SOFTWARE
 
 .EXAMPLE
-PS> Get-ChildItem HKLM:\SOFTWARE | Add-RegKeyMember | Select Name, LastWriteTime
+    PS C:\> Get-RegWritetime HKLM:\SOFTWARE | Select Name, LastWriteTime
 
-Show the name and last write time of HKLM:\SOFTWARE's child keys
-
-.EXAMPLE
-PS> Get-ChildItem HKLM:\SYSTEM\CurrentControlSet\Control\Lsa | Add-RegKeyMember | where classname | select name, classname
-
-Show the name and class name of child keys under Lsa that have a class name defined.
+    Show the name and last write time of HKLM:\SOFTWARE
 
 .EXAMPLE
-PS> Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | Add-RegKeyMember | where lastwritetime -gt (Get-Date).AddDays(-30) | 
->> select PSChildName, @{ N="DisplayName"; E={gp $_.PSPath | select -exp DisplayName }}, @{ N="Version"; E={gp $_.PSPath | select -exp DisplayVersion }}, lastwritetime |
->> sort lastwritetime
+    PS C:\> Get-ChildItem HKLM:\SOFTWARE | Get-RegWritetime | Select Name, LastWriteTime
 
-Show applications that have had their registry key updated in the last 30 days (sorted by the last time the key was updated).
-NOTE: On a 64-bit machine, you will get different results depending on whether or not the command was executed from a 32-bit
-      or 64-bit PowerShell prompt.
+    Show the name and last write time of HKLM:\SOFTWARE's child keys
+
+.EXAMPLE
+    PS C:\> Get-ChildItem HKLM:\SYSTEM\CurrentControlSet\Control\Lsa | Get-RegWritetime | where classname | select name, classname
+
+    Show the name and class name of child keys under Lsa that have a class name defined.
+
+.EXAMPLE
+    PS C:\> Get-ChildItem HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | Get-Regtime HKLM:\SOFTWARE | Select Name, LastWriteTime | where lastwritetime -gt (Get-Date).AddDays(-30) | 
+    >> select PSChildName, @{ N="DisplayName"; E={gp $_.PSPath | select -exp DisplayName }}, @{ N="Version"; E={gp $_.PSPath | select -exp DisplayVersion }}, lastwritetime |
+    >> sort lastwritetime
+
+    Show applications that have had their registry key updated in the last 30 days (sorted by the last time the key was updated).
+
+    NOTE: On a 64-bit machine, you will get different results depending on whether or not the command was executed from a 32-bit
+    or 64-bit PowerShell prompt.
 
 #>
+
+
+Function Get-RegWriteTime {
 
     [CmdletBinding()]
     param(

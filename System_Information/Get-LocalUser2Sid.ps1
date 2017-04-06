@@ -1,11 +1,10 @@
 ﻿<#
-This script will return the sid for the specified local user account.
+.SYNOPSIS
+    This script will return the sid for the specified local user account.
 
-Usage:
-    LocalUser2Sid.ps1 -user <username>
+.EXAMPLE
+    PS C:\> .\LocalUser2Sid.ps1 -user joe
 
-Example:
-    LocalUser2Sid.ps1 -user joe
 #>
 
 Param(

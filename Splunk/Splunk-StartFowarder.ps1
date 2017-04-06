@@ -1,4 +1,7 @@
-﻿# Starts a Splunk Forwarder. It also logs the status and start time to two local files.
+﻿<# 
+.SYNOPSIS
+    Starts a Splunk Forwarder. It also logs the status and start time to two local files.
+#>
 
 $computers = get-content C:\users\blue\Desktop\computers.txt
 $service = "splunkforwarder"
@@ -16,7 +19,8 @@ get-service -computername $computers -name $service | start-service
 get-service -computername $computers -name $service | Select MachineName, Name, Status   | ft -AutoSize  >> $service_stat
 
 # Gets the start time of a proces,s which is tied to a service
-foreach($computer in $computers){
-echo $computer >> $start_times
-get-process -Name $process_name | select Name, StartTime | ft >> $start_times
-}
+foreach($computer in $computers)
+    {
+    echo $computer >> $start_times
+    get-process -Name $process_name | select Name, StartTime | ft >> $start_times
+    }

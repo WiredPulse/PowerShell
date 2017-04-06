@@ -1,5 +1,8 @@
-﻿# Reads in a list of Computers and returns a directory listing of a specified directory along with the creation time\date, and whether or not it is hidden within the filesystem. This 
-# script can be run remotely but it is not the fastest.
+﻿<# 
+.SYNOPSIS
+    Reads in a list of Computers and returns a directory listing of a specified directory along with the creation time\date, and whether or not it is hidden 
+    within the filesystem. This script can be run remotely but it is not the fastest.
+ #>
 
 $computers = Get-Content .\computers.txt
 

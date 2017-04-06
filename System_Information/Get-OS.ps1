@@ -1,17 +1,6 @@
 ﻿<#
-    .SYNOPSIS  
-        Retrieve Operating System version from a single system or a group of systems.
-
-    .NOTES  
-        File Name      : Get-OS.ps1
-        Version        : v.0.1  
-        Prerequisite   : PowerShell
-        Created        : 06 MAY 16
-     
-
-    ####################################################################################
-
-
+.SYNOPSIS  
+    Retrieve Operating System version from a single system or a group of systems.
 #>
 
 function Get-OS

@@ -1,20 +1,17 @@
 ﻿<#
-SYNOPSIS:
+.SYNOPSIS
     Searches the filesystem for text files that contains passwords (potentially). The hits fit the criteria of at least four characters but no more than 15 
     with one being an upper, lower, number, and special character.
 
-USAGE: 
-    Call upon file from PowerShell (.\Get-TextPasswords.ps1)
 
-REQUIREMENTS:
-    At least PowerShell v2
 #>
 
+$dir2search = C:\
 
 # ============================================================================== 
 # Gets a listing of text files
 # ============================================================================== 
-$items = Get-ChildItem c:\ -Recurse -Force -ErrorAction ignore | where {$_.extension -eq ".txt"}
+$items = Get-ChildItem $dir2search -Recurse -Force -ErrorAction ignore | where {$_.extension -eq ".txt"}
 
 # ============================================================================== 
 # Important Variables

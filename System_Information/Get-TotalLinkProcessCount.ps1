@@ -1,5 +1,7 @@
-﻿# Gets a count of files that haave a link between a process and a data file indicating that the file participates in the execution of the process.
-
+﻿<# 
+.SYNOPSIS
+    Gets a count of files that haave a link between a process and a data file indicating that the file participated in the execution of the process.
+#>
 
 $computers = Get-Content C:\users\blue\desktop\computers.txt
 

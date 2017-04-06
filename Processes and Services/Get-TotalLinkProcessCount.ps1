@@ -1,7 +1,11 @@
-﻿# Gets a count of files that have a link between a process and a data file indicating that the file participates in the execution of the process.
+﻿<# 
+.SYNOPSIS
+    Gets a count of files that have a link between a process and a data file. This indicates that the file participates in the execution of the process.
 
+#>
 
-$computers = Get-Content C:\users\blue\desktop\computers.txt
+write-host "Input the path the file containing names\IPs or input a single IP" -ForegroundColor Cyan
+$computers = read-host " "
 
 $current_user = [Environment]::UserName  
 $newline = "`r`n" 
