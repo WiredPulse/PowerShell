@@ -113,7 +113,7 @@ Function combine
 
 # making script
 "c:\autorunsc64.exe /accepteula" >> .\autoruns.ps1
-"c:\autorunsc64.exe -a * -nobanner -c > c:\auto.csv" >> .\autoruns.ps1
+"c:\autorunsc64.exe -a * -m -nobanner -c > c:\auto.csv" >> .\autoruns.ps1
 
 
 if($ComputerName -like '*.txt')
