@@ -1,28 +1,25 @@
 ﻿<#
 .SYNOPSIS
-    This script is a wrapper to remotely execute UserAssistView.exe across multiple systems and returns the data to the local machine in a csv. The results 
+    This script is a wrapper to remotely execute ShellbagsView.exe across multiple systems and returns the data to the local machine in a csv. The results 
     are consolidated on the local machine and are best read in using 'out-gridview'.
 
-    UserAssistView.exe decrypts and displays the list of all UserAssist entries stored under HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer
-    \UserAssist key. The UserAssist key contains information about the exe files and links that you open frequently. The program will only get this data from the user currently logged in. In you want to parse this data for other users on the system, get the 
-    NTUSER.dat file and user RegRipper against it. 
 
     **** IMPORTANT *****
-    This will only get the UserAssist of the user that ran this script. With that said, running it as admin may not be what you want to do.
+    This will only get Shellbags of the user that ran this script. With that said, running it as admin may not be what you want to do.
 
 .PARAMETER computername
     Used to specify a computer or list of computers
 
 .PATH
-    Used to specify the path to userassistview.exe
+    Used to specify the path to shellbagview.exe
 
-.EXAMPLES
-    PS C:\> .\Get-UserAssist.ps1 -computername 172.16.155.201 -path c:\userassistview.exe
+.EXAMPLE
+    PS C:\> .\Get-UserAssist.ps1 -computername 172.16.155.201 -path c:\shellbagview.exe
 
-    Runs userassistview.exe on 172.16.155.201.
+    Runs shellbagview.exe on 172.16.155.201.
 
 .NOTES
-    http://www.nirsoft.net/utils/userassist_view.html
+    http://www.nirsoft.net/utils/shell_bags_view.html
 
 #>
 
@@ -33,11 +30,11 @@ param(
     )
 
 
-$syntax = 'C:\UserAssistView.exe /scomma c:\users\public\UserAssist.csv'
+$syntax = 'C:\shellbagsview.exe /scomma c:\users\public\shellbags.csv'
 
-if(!(test-path c:\users\$env:USERNAME\desktop\UserAssist))
+if(!(test-path c:\users\$env:USERNAME\desktop\shellbags))
     {
-    new-item c:\users\$env:USERNAME\desktop\UserAssist -ItemType directory | out-null
+    new-item c:\users\$env:USERNAME\desktop\shellbags -ItemType directory | out-null
     }
 
 
@@ -55,7 +52,7 @@ Function call
             }
         elseif($proc.processid -eq $null)
             {
-            "$cpu : Not accessible via WMI" >> c:\users\$env:USERNAME\desktop\UserAssist\_Log.txt
+            "$cpu : Not accessible via WMI" >> c:\users\$env:USERNAME\desktop\shellbags\_Log.txt
             }
 
         write-host 'Process call initiated on'$cpu'...' -ForegroundColor cyan
@@ -69,11 +66,11 @@ Function retrieve
     {
     foreach($cpu in $computers)
         {
-        copy-Item \\$cpu\c$\users\public\UserAssist.csv c:\users\$env:USERNAME\desktop\UserAssist\
-        rename-item c:\users\$env:USERNAME\desktop\UserAssist\UserAssist.csv c:\users\$env:USERNAME\desktop\UserAssist\$cpu-$env:USERNAME-UserAssist.csv
+        copy-Item \\$cpu\c$\users\public\shellbags.csv c:\users\$env:USERNAME\desktop\shellbags\
+        rename-item c:\users\$env:USERNAME\desktop\shellbags\shellbags.csv c:\users\$env:USERNAME\desktop\shellbags\$cpu-$env:USERNAME-shellbags.csv
 
-        remove-item \\$cpu\c$\UserAssistView.exe
-        remove-item \\$cpu\c$\users\public\UserAssist.csv
+        remove-item \\$cpu\c$\shellbagsView.exe
+        remove-item \\$cpu\c$\users\public\shellbags.csv
 
         write-host 'Pulling data back from'$cpu'...' -ForegroundColor green
         }
