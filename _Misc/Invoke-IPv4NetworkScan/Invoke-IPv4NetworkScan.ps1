@@ -1,3 +1,5 @@
+Function Invoke-IPv4NetworkScan{
+
 <#
 .SYNOPSIS
     Asynchronus IPv4 Network Scanner
@@ -15,7 +17,7 @@
         192.168.178.1   Up     172.16.155.201
 
 .EXAMPLE
-    PS C:\> .\Invoke-IPv4NetworkScan.ps1 -IPv4Address 192.168.178.0 -Mask 255.255.255.0 -DisableDNSResolving
+    PS C:\> Invoke-IPv4NetworkScan -IPv4Address 192.168.178.0 -Mask 255.255.255.0 -DisableDNSResolving
 
         IPv4Address    Status
         -----------    ------
@@ -704,4 +706,6 @@ Process{
 
 End{
     
+}
+
 }

@@ -1,4 +1,6 @@
-﻿<# 
+﻿Function Get-PassHashes {
+
+<# 
 .SYNOPSIS 
     Nishang payload which dumps password hashes to console. 
  
@@ -7,7 +9,7 @@
     The hashes could be exfiltrated using method of choice.
 
 .EXAMPLE 
-    PS > .\Get-PassHashes.ps1 
+    PS > Get-PassHashes
 
     Dumps password hashes to the console.
  
@@ -563,4 +565,6 @@ else
 {
     Get-PassHashes
     $pastevalue
+}
+
 }

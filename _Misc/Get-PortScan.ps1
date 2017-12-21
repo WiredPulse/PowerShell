@@ -1,4 +1,6 @@
-﻿<# 
+﻿Function Get-PortScan {
+
+<# 
 .SYNOPSIS
     Scans a range of IPs and informs you if a specific port is listening. 
 
@@ -15,7 +17,7 @@
     IP to end with... only input the last octect. Ex: .30.
 
 .EXAMPLE
-    PS c:\> .\Get-PortScan.ps1
+    PS c:\> Get-PortScan
                     Input a port to scan:    135
                     Input a Network to scan (first three octects):    172.16.155
                     Input a starting range (last octect only):    10
@@ -49,3 +51,4 @@ foreach ($r in $range)
          }
  }
 
+}

@@ -1,4 +1,6 @@
-﻿<#
+﻿Function Convert-Rot13 {
+
+<#
 .SYNOPSIS  
     Convert given string to rot13
 
@@ -11,7 +13,7 @@
     Used to input a string to convert.
 
 .EXAMPLE
-    PS c:\> .\Convert-Rot13.ps1 -rot13string hamburger
+    PS c:\> Convert-Rot13 -rot13string hamburger
 
     Converts the string 'hamburger' to Rot13. 
 
@@ -49,3 +51,5 @@ ForEach-Object
     }
 
 $string
+
+}

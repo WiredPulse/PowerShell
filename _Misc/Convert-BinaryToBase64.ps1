@@ -1,4 +1,6 @@
-﻿param (
+﻿Function Convert-BinaryToBase64 {
+
+param (
 [Parameter(Mandatory=$true)][string]$FilePath
    )
  
@@ -21,3 +23,4 @@ else
  
 $Base64String
  
+}

@@ -1,3 +1,5 @@
+Function Invoke-IPv4PortScan{
+
 <#
 .SYNOPSIS
     Asynchronus IPv4 Port Scanner
@@ -8,7 +10,7 @@
     The result will contain the Port number, Protocol, Service name, Description and the Status.
     
 .EXAMPLE
-    .\Invoke-IPv4PortScan.ps1 -ComputerName 172.16.155.201 -StartPort 20 -EndPort 500 | format-table
+    PS C:\> Invoke-IPv4PortScan -ComputerName 172.16.155.201 -StartPort 20 -EndPort 500 | format-table
 
         Port Protocol ServiceName  ServiceDescription               Status
         ---- -------- -----------  ------------------               ------
@@ -342,5 +344,7 @@ Process{
 }
 
 End{
+
+}
 
 }

@@ -1,5 +1,11 @@
 ﻿Function Disable-Cortana
 {  
+
+<#
+.SYNOPSIS
+    Disables Cortana in Windows10.
+
+#>
     $path1 = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search"   
     $path2 = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search"  
 
@@ -18,4 +24,3 @@
     Stop-Process -name explorer
 }
 
-Disable-Cortana

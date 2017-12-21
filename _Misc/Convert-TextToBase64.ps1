@@ -1,4 +1,6 @@
-﻿<# 
+﻿Function Convert-TextToBase64 {
+
+<# 
 .SYNOPSIS
     Base64 encodes inputted data.
 
@@ -6,7 +8,7 @@
     String to Base64 encode.
 
 .EXAMPLE
-    PS c:\> .\Convert-TextToBase64.ps1 -encode hamburger
+    PS c:\> Convert-TextToBase64 -encode hamburger
 
     Base64 encoding the string "hamburger".
 #>
@@ -20,3 +22,5 @@ param(
 $bytes = [system.text.encoding]::unicode.getbytes($encode)
 $encodedCommand = [convert]::ToBase64String($bytes) 
 $encodedCommand
+
+}

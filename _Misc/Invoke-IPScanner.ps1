@@ -1,4 +1,6 @@
-﻿<# 
+﻿Function Invoke-IPScanner{
+
+<# 
 .SYNOPSIS
     Asynchronous IP range scanner (ping sweep).  
 
@@ -12,7 +14,7 @@
     Octect to end with.
 
 .EXAMPLE
-    PS c:\> .\Invoke-IPScanner.ps1 -net '192.168.0' -startrange '80' -endrange '127'
+    PS c:\> Invoke-IPScanner -net '192.168.0' -startrange '80' -endrange '127'
 
     Scans 192.168.080 - 192.168.0.127".
 
@@ -78,3 +80,5 @@ foreach ($result in $results) {
         write-host -f Red “$($result[0]) is not responding”  
     }  
 } 
+
+}

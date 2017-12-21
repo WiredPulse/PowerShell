@@ -1,9 +1,14 @@
+function Get-TranscriptStatus
+{
+
 <#
-Returns whether the host is transcribing and if so, provides the file name and creation date
+.SYNOPSIS
+   Returns whether the host is transcribing and if so, provides the file name and creation date. This works
+   in PowerShell version 2 only. 
 #>
 
-﻿function Get-TranscriptStatus
-    {
+
+
     try
         {
         $exHost = $host.gettype().getproperty("ExternalHost",[reflection.bindingflags]"nonpublic,instance").getvalue($host, @())
@@ -31,4 +36,4 @@ Returns whether the host is transcribing and if so, provides the file name and c
         write-host "Transcript file : " -ForegroundColor green -NoNewline; write-host $file -ForegroundColor yellow
         write-host "Creation Time : " -ForegroundColor green -NoNewline; write-host $file.creationtime -ForegroundColor yellow
         }
-    }
+}

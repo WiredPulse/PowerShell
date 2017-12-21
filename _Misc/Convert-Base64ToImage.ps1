@@ -1,4 +1,6 @@
-﻿<# 
+﻿Function Convert-Base64ToImage {
+
+<# 
 .SYNOPSIS
     Converts a Base64 string into an image.
 
@@ -9,7 +11,7 @@
     Name of image file to convert Base64 encoded string to. The script was tested with jpg and png; other formats may work.
 
 .EXAMPLE
-    PS c:\> .\Convert-Base64ToImage.ps1 -b64_string 'MTcyLjE2LjE1NS4yMDANCjE3Mi4xNi4xNTUuMjAxDQoxNzIuMTYuMTU1LjIwMw==' -output_file c:\my_pic.png
+    PS c:\> Convert-Base64ToImage -b64_string 'MTcyLjE2LjE1NS4yMDANCjE3Mi4xNi4xNTUuMjAxDQoxNzIuMTYuMTU1LjIwMw==' -output_file c:\my_pic.png
 
     Decodes specified string into an image called "my_pic.png".
 #>
@@ -26,3 +28,5 @@ $ms = New-Object IO.MemoryStream($imageBytes, 0, $imageBytes.Length)
 $ms.Write($imageBytes, 0, $imageBytes.Length);
 $image = [System.Drawing.Image]::FromStream($ms, $true)
 $image.Save("$output_file")
+
+}
