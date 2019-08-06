@@ -1,6 +1,6 @@
 $logs = Get-childitem C:\inetpub\logs\LogFiles
 
 foreach($log in $logs){
-    $objectHead = ((Get-Content -Path $filePath -TotalCount 4 | Select -Skip 3 |Tee-Object -Variable content)[9..($content.length-1)] -join '') -split ' '
+    $objectHead = ((Get-Content -Path $log -TotalCount 4 | Select -Skip 3 |Tee-Object -Variable content)[9..($content.length-1)] -join '') -split ' '
     Get-Content $objectHead | ConvertFrom-Csv -Delimiter ' ' -Header $objectHead | out-gridview
 }
