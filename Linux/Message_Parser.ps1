@@ -1,5 +1,4 @@
 $logs = get-content "/var/log/secure"
-
 $obj = @()
 $obj = foreach($log in $logs){
     $log = $log -split "]: "
@@ -12,3 +11,5 @@ $obj = foreach($log in $logs){
         Message = $log[1]
     }
 }
+
+$obj
