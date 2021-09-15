@@ -3,7 +3,6 @@ $obj = @()
 $obj = foreach($log in $logs){
     $log = $log -split "]: "
     $data = ($log[0] -split "\[") -split '\s+'
-    #$message = $log[1]  # Message
     [PSCustomObject]@{
         Time = ($data[0..2]) -join ' '
         Process = $data[4]
