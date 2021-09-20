@@ -4,7 +4,7 @@ $obj = @()
 $obj = foreach($sys in $systemctl){
     $sys = $sys -split '\s+',5
     $stat = service $sys[0] status 2>&1
-    $time = $path = ''
+    $time = $path = $id = ''
     if($sys[2] -eq 'active'){
         $active = $true
     }
