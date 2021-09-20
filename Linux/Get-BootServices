@@ -1,0 +1,10 @@
+$systemctl = systemctl list-unit-files --state=enabled --no-legend
+$obj = @()
+$obj = foreach($sys in $systemctl[1..$systemctl.length[-1]]){
+    $sys = $sys -split '\s+'
+    [PSCustomObject]@{
+        Name = $sys[0]
+    }
+}
+
+$obj
