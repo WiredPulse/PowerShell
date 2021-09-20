@@ -27,3 +27,5 @@ $obj = foreach($user in $users){
         }
     }
 }
+
+$obj
