@@ -1,0 +1,21 @@
+$byteFile = [System.IO.File]::ReadAllBytes("/home/nando/Desktop/test.ps1")
+$httpListener = New-Object System.Net.HttpListener
+$httpListener.Prefixes.Add("http://+:9046/")
+$httpListener.Start()
+
+try
+{
+  while ($httpListener.IsListening) {  
+ 
+    $httpListenerContext = $httpListener.GetContext()
+    $httpResponse = $httpListenerContext.Response
+    $httpResponse.ContentType = "text/html"
+    $httpResponse.ContentLength64 = $byteFile.Length
+    $httpResponse.OutputStream.Write($byteFile,0,$byteFile.Length)
+    $httpResponse.Close()
+  }
+}
+finally
+{ 
+    $httpListener.Close()
+}
