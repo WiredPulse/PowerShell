@@ -1,0 +1,4 @@
+
+
+New-ComplianceSearch -name "phishingEmail_19" -exchangelocation all - contentmatchquery 'subject:*nov*'
+Start-ComplianceSearch
