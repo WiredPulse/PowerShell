@@ -1,4 +1,19 @@
+# NOTE: The user you use to query Excahnge with must have the Discovery Management RBAC Role.
 
+# Add a user to the Discovery Management RBAC Role
+Add-RoleGroupMember "discovery management" -member [some_user]
 
-New-ComplianceSearch -name "phishingEmail_19" -exchangelocation all - contentmatchquery 'subject:*nov*'
-Start-ComplianceSearch
+# Creates a search called "phishingCampaign" that searches for emails that contain "nov" in the subject
+New-ComplianceSearch -name "phishingCampaign" -exchangelocation all - contentmatchquery 'subject:*nov*'
+
+# Actually executes the search from above
+Start-ComplianceSearch -Identity "phishingCampaign"
+
+# Returns any hits from the search
+Get-ComplianceSearch -Identity "phishingCampaign" | select-object name, runby, jobendtime, status, successresults
+
+# Moves any messages that match the criteria to the Deletion folder in the user's Recoverable Items folder.
+New-ComplianceSearchAction -SearchName "phishingCampaign" -Purge -PurgeType softdelete
+
+# Retrieves the results and serves as a method to validate deletion. 
+Get-ComplianceSearchAction
