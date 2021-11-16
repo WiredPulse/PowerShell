@@ -1,21 +1,22 @@
 # NOTE: The user you use to query Excahnge with must have the Discovery Management RBAC Role.
 
 # Add a user to the Discovery Management RBAC Role
-Add-RoleGroupMember "discovery management" -member <some_user>
+Add-RoleGroupMember "discovery management" -member [some_user]
 
 <#
-The below will enable you to search mailboxes for email(s) with attachments named ìdocument1î and ìdocument2î 
-regardless of the file extension. The script will then copy the email message to the ìadmin.mailboxî mailbox 
-in a folder called ìSearch_07102014î. Once the script is complete open ìadmin.mailboxî in Outlook and youíll 
-see the ìSearch_11242015î folder under the Inbox containing all the results.
+Searches for emails with attachments named "document1" and "document2", regardless of the file extension. For any hits, a log file containing metadata about the message (user, 
+read status, sent date/time, etc.) will be saved to a folder called "Search_Nov13" within the "ftomlinson" mailbox.
 #>
-get-mailbox | Search-Mailbox -SearchQuery 'Attachment:"document1.*" or "document2.*"' -TargetMailbox admin.mailbox -TargetFolder "Search_11242015" -LogLevel Full 
+Get-Mailbox | Search-Mailbox -SearchQuery 'Attachment:"document1.*" or "document2.*"' -TargetMailbox "ftomlinson" -TargetFolder "Search_Nov13" -LogLevel Full 
 
+#This modification will search for all ‚Äú.doc‚Äù and ‚Äú.pdf‚Äù files and copy them to the same mailbox and folder
+Get-Mailbox | Search-Mailbox -SearchQuery 'Attachment:"*.doc" or "*.pdf"' -TargetMailbox "ftomlinson" -TargetFolder "Search_Nov13" -LogLevel Full 
 
-#This modification will search for all ì.docî and ì.pdfî files and copy them to the same mailbox and folder
-get-mailbox | Search-Mailbox -SearchQuery 'Attachment:"*.doc" or "*.pdf"' -TargetMailbox admin.mailbox -TargetFolder "Search_11242015" -LogLevel Full 
+#This modification will search for all ‚Äú.doc‚Äù and ‚Äú.pdf‚Äù files and copy them to the same mailbox and folder
+Get-Mailbox | Search-Mailbox -SearchQuery 'Attachment:"*.doc" or "*.pdf"' -TargetMailbox admin.mailbox -TargetFolder "Search_11242015" -LogLevel Full 
+
 
 
 #To search for keywords use this modification.
-get-mailbox | Search-Mailbox -SearchQuery "badword1" or "badword2" -TargetMailbox admin.mailbox -TargetFolder "Search_11242015" -LogLevel Full 
+Get-Mailbox | Search-Mailbox -SearchQuery "badword1" or "badword2" -TargetMailbox admin.mailbox -TargetFolder "Search_11242015" -LogLevel Full 
 
