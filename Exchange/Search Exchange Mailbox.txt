@@ -13,10 +13,10 @@ Get-Mailbox | Search-Mailbox -SearchQuery 'Attachment:"document1.*" or "document
 Get-Mailbox | Search-Mailbox -SearchQuery 'Attachment:"*.doc" or "*.pdf"' -TargetMailbox "ftomlinson" -TargetFolder "Search_Nov13" -LogLevel Full 
 
 #This modification will search for all “.doc” and “.pdf” files and copy them to the same mailbox and folder
-Get-Mailbox | Search-Mailbox -SearchQuery 'Attachment:"*.doc" or "*.pdf"' -TargetMailbox admin.mailbox -TargetFolder "Search_11242015" -LogLevel Full 
+Get-Mailbox | Search-Mailbox -SearchQuery 'Attachment:"*.doc" or "*.pdf"' -TargetMailbox "ftomlinson" -TargetFolder "Search_Nov13" -LogLevel Full 
 
 
 
 #To search for keywords use this modification.
-Get-Mailbox | Search-Mailbox -SearchQuery "badword1" or "badword2" -TargetMailbox admin.mailbox -TargetFolder "Search_11242015" -LogLevel Full 
+Get-Mailbox | Search-Mailbox -SearchQuery "badword1" or "badword2" -TargetMailbox "ftomlinson" -TargetFolder "Search_Nov13" -LogLevel Full 
 
