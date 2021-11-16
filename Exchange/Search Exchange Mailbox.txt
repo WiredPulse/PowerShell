@@ -4,19 +4,43 @@
 Add-RoleGroupMember "discovery management" -member [some_user]
 
 <#
-Searches for emails with attachments named "document1" and "document2", regardless of the file extension. For any hits, a log file containing metadata about the message (user, 
-read status, sent date/time, etc.) will be saved to a folder called "Search_Nov13" within the "ftomlinson" mailbox.
+  Searches for emails with attachments that begin with the names "document1" or "document2", regardless of the file extension. For any hits, a log file containing metadata about 
+  the message (user, read status, sent date/time, etc.) will be saved to a folder called "Search_Nov13" within the "ftomlinson" mailbox.
 #>
 Get-Mailbox | Search-Mailbox -SearchQuery 'Attachment:"document1.*" or "document2.*"' -TargetMailbox "ftomlinson" -TargetFolder "Search_Nov13" -LogLevel Full 
 
-#This modification will search for all “.doc” and “.pdf” files and copy them to the same mailbox and folder
+<#
+  Searches for emails with attachments that end with the names "*.docx" or "*.pdf". For any hits, a log file containing metadata about the message (user, read status, sent 
+  date/time, etc.) will be saved to a folder called "Search_Nov13" within the "ftomlinson" mailbox.
+#>
 Get-Mailbox | Search-Mailbox -SearchQuery 'Attachment:"*.doc" or "*.pdf"' -TargetMailbox "ftomlinson" -TargetFolder "Search_Nov13" -LogLevel Full 
 
-#This modification will search for all “.doc” and “.pdf” files and copy them to the same mailbox and folder
-Get-Mailbox | Search-Mailbox -SearchQuery 'Attachment:"*.doc" or "*.pdf"' -TargetMailbox "ftomlinson" -TargetFolder "Search_Nov13" -LogLevel Full 
+<#
+  Searches for emails where "pineapples@sandbox.local" is in the From field. For any hits, a log file containing metadata about the message (user, read status, sent date/time, 
+  etc.) will be saved to a folder called "Search_Nov13" within the "ftomlinson" mailbox.
+#>
+Get-Mailbox | Search-Mailbox -SearchQuery 'from:"pineapples@sandbox.local"' -TargetMailbox "ftomlinson" -TargetFolder "Search_Nov13" -LogLevel Full 
 
+<#
+  Searches for emails where "pineapples@sandbox.local" is in the To field. For any hits, a log file containing metadata about the message (user, read status, sent date/time, 
+  etc.) will be saved to a folder called "Search_Nov13" within the "ftomlinson" mailbox.
+#>
+Get-Mailbox | Search-Mailbox -SearchQuery 'to:"pineapples@sandbox.local"' -TargetMailbox "ftomlinson" -TargetFolder "Search_Nov13" -LogLevel Full 
 
+<#
+  Searches for emails where "pineapples@sandbox.local" is in the CC field. For any hits, a log file containing metadata about the message (user, read status, sent date/time, 
+  etc.) will be saved to a folder called "Search_Nov13" within the "ftomlinson" mailbox.
+#>
+Get-Mailbox | Search-Mailbox -SearchQuery 'cc:"pineapples@sandbox.local"' -TargetMailbox "ftomlinson" -TargetFolder "Search_Nov13" -LogLevel Full 
 
-#To search for keywords use this modification.
+<#
+  Searches for emails where "bojangles@sandbox.local" is in the From, To, CC, or BCC fields. For any hits, a log file containing metadata about the message (user, read status, 
+  sent date/time, etc.) will be saved to a folder called "Search_Nov13" within the "ftomlinson" mailbox.
+#>
+Get-Mailbox | Search-Mailbox -SearchQuery 'Participants:"bojangles@sandbox.local"' -TargetMailbox "ftomlinson" -TargetFolder "Search_Nov13" -LogLevel Full 
+
+<#
+  Searches emails for the keyword of "badword1" or "badword2". For any hits, a log file containing metadata about the message (user, read status, 
+  sent date/time, etc.) will be saved to a folder called "Search_Nov13" within the "ftomlinson" mailbox.
+#>
 Get-Mailbox | Search-Mailbox -SearchQuery "badword1" or "badword2" -TargetMailbox "ftomlinson" -TargetFolder "Search_Nov13" -LogLevel Full 
-
